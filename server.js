@@ -21,6 +21,14 @@ mongoose
 
 const port = process.env.PORT || 3000;
 // eslint-disable-next-line prettier/prettier
-app.listen(port, ()=>{
+const server = app.listen(port, ()=>{
   console.log(`Running on port ${port}`);
 });
+process.on('unhandledRejection', err => {
+  console.log(err.name, err.message);
+  console.log('Unhandled Rejection, shutting down');
+  server.close(() => {
+    process.exit(1);
+  });
+
+})
