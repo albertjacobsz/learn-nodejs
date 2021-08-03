@@ -17,7 +17,7 @@ const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
 const viewRouter = require('./routes/viewRoutes');
-const bookingController = require('./../controllers/bookingController')
+const bookingController = require('./controllers/bookingController')
 
 const app = express();
 app.enable('trust proxy')
