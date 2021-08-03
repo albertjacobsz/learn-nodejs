@@ -48,6 +48,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   res.redirect(req.originalUrl.split('?')[0])
 })*/
 const createBookingCheckout = async session => {
+  
   const tour = session.client_reference_id;
   const user = (await User.findOne({ email: session.customer_email })).id;
   const price = session.display_items[0].amount / 100;
@@ -59,6 +60,7 @@ exports.getAllBookings = factory.getAll(Booking)
 exports.updateBooking = factory.updateOne(Booking)
 exports.deleteBookings = factory.deleteOne(Booking)
 exports.webhookCheckout = (req, res, next) => {
+  const stripe = Stripe(process.env.STRIPE_SECRET_KEY_1)
   const signature = req.headers['stripe-signature'];
   let event;
   try {
