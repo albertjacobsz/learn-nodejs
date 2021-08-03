@@ -48,10 +48,10 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   res.redirect(req.originalUrl.split('?')[0])
 })*/
 const createBookingCheckout = async session => {
-  
+  const stripe = Stripe(process.env.STRIPE_SECRET_KEY_1)
   const tour = session.client_reference_id;
-  const user = (await User.findOne({ email: session.customer_email })).id;
-  const price = session.display_items[0].amount / 100;
+  const user = (await User.findOne({ email: session.customer_details.email })).id;
+  const price = session.amount_total / 100;
   await Booking.create({ tour, user, price });
 }; 
 exports.createBooking = factory.createOne(Booking)
