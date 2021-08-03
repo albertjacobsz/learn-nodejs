@@ -2,7 +2,8 @@ import '@babel/polyfill'
 import { displayMap } from './mapbox';
 import { login, logout } from './login.js';
 import { updateSettings } from './updateSettings.js'
-import {bookTour} from './stripe.js'
+import { bookTour } from './stripe.js'
+import {showAlert} from './alerts'
 const mapBox = document.getElementById('map')
 const loginForm = document.querySelector('.form--login');
 const logoutBtn = document.querySelector('.nav__el--logout')
@@ -59,3 +60,5 @@ if (bookBtn) {
         bookTour(tourId)
     })
 }
+const alertMessage = document.querySelector('body').dataset.alert
+if (alert) showAlert('success',alertMessage)
